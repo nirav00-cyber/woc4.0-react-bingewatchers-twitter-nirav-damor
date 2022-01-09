@@ -15,6 +15,9 @@ function App()
     <div>
       <Layout>
         <Switch>
+          <Route path='/' exact>
+            <TweetPage ></TweetPage>
+          </Route>
           <Route path='/login'>
             <LoginPage></LoginPage>
           </Route>
@@ -27,9 +30,7 @@ function App()
           <Route path='/trending'>
             <TrendingPage></TrendingPage>
           </Route>
-          <Route path='*'>
-            <TweetPage ></TweetPage>
-          </Route>
+          
         </Switch>
       </Layout>
     </div>
