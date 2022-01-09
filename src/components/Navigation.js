@@ -1,9 +1,26 @@
 import React,{useState} from 'react'
 import { Link } from 'react-router-dom';
 import './Navigation.css';
+import { useAuth } from '../context/AuthContext';
+import { useHistory } from 'react-router-dom'
+
 function Navigation()
 {
     const [isToggle, setIsToggle] = useState(false);
+    const { logout } = useAuth();
+    const history = useHistory();
+    const logoutHandler = async () =>
+    {
+        
+        try
+        {
+            await logout();
+            history.push('/login')
+        } catch (error)
+        {
+            console.log(error);
+        }
+    }
     const toggleHandler = () =>
     {
         setIsToggle((prevState) => !prevState);
@@ -48,7 +65,7 @@ function Navigation()
                         </Link>
                     </li>
                      <li>
-                        <button>
+                        <button onClick={logoutHandler}>
                             Logout
                         </button>
                     </li> 

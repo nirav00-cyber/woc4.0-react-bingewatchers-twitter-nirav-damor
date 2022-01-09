@@ -56,6 +56,21 @@ h2{
     margin-top: 20px;
     width: 100%; 
 }
+.btn:active {
+            transform: scale(0.98);
+            /* Scaling button to 0.98 to its original size */
+            box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+            /* Lowering the shadow */
+        }
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+
+
 
 .btn-link{
 font-size: medium;
@@ -71,4 +86,14 @@ font-size: medium;
 
 .btn-link:hover{
     color: #3498db;
+}
+
+
+.error{
+    border: 2px solid red;
+    border-radius: 4px;
+
+    background-color: rgba(233, 78, 78, 0.2);
+    text-align: center;
+    color: red;
 }
