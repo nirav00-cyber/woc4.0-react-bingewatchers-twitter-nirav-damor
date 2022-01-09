@@ -1,11 +1,20 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import Trending from '../components/Trending'
-
 const TMDB_API = 'https://api.themoviedb.org/3/trending/all/day?api_key=417ae7fd956736f41db826d383085158';
 
-const trendingShows = [];
-async function fetchTrending()
+
+
+
+
+function TrendingPage()
 {
+    const [trendingShows, setTrendingShows] = useState([]);
+
+    useEffect(() =>
+    {
+    async function fetchTrending()
+    {
+    let dummyShows = [];
     const response = await fetch(TMDB_API);
     const data = await response.json();
     if (!response.ok)
@@ -13,29 +22,31 @@ async function fetchTrending()
         alert('Error Occurred while fetching Data');
         return;
     }
+    // console.log(data);
     const shows = data.results;
     for(let show in shows)
     {
         const showObj = {
             id: shows[show].id,
             title: shows[show].title,
-            releaseData: shows[show].release_date,
+            releaseDate: shows[show].release_date,
             description:shows[show].overview,
             rating: shows[show].vote_average,   
             poster:shows[show].backdrop_path
         }    
-        trendingShows.push(showObj);
+        dummyShows.push(showObj);
+        }
+        setTrendingShows(dummyShows);
+    console.log(dummyShows);    
     }
-    console.log(trendingShows);
-}
-
-function TrendingPage() {
+    fetchTrending();
+    },[]);
+    
     return (
-        <div>
+        <>
             <Trending trendingShowsData={trendingShows}/>
-            <button onClick={fetchTrending}>Fetch Trending</button>
-        </div>
+        </>
     )
 }
 
-export default TrendingPage
+export default React.memo(TrendingPage);

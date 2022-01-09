@@ -2,7 +2,8 @@
 .navbar{
     background-color: #3498db;
     display: flex;
-    position: relative;
+    position: sticky;
+    top: 0;
     justify-content: space-between;
     align-items: center;
     color: white;
@@ -10,6 +11,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     padding:0 2%;
     margin: 0;
+    z-index: 10;
 }
 
 .logo{

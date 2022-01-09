@@ -6,7 +6,11 @@ import { Switch,Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import TrendingPage from './pages/TrendingPage';
 
-function App() {
+
+
+function App()
+{
+  
   return (
     <div>
       <Layout>
@@ -24,7 +28,7 @@ function App() {
             <TrendingPage></TrendingPage>
           </Route>
           <Route path='*'>
-            <TweetPage></TweetPage>
+            <TweetPage ></TweetPage>
           </Route>
         </Switch>
       </Layout>
