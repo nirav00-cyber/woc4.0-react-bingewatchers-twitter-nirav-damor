@@ -1,13 +1,13 @@
 import React,{useState} from 'react'
 import { Link } from 'react-router-dom';
 import './Navigation.css';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../lib/AuthContext';
 import { useHistory } from 'react-router-dom'
 
 function Navigation()
 {
     const [isToggle, setIsToggle] = useState(false);
-    const { logout } = useAuth();
+    const { logout,currentUser } = useAuth();
     const history = useHistory();
     const logoutHandler = async () =>
     {
@@ -53,22 +53,23 @@ function Navigation()
                         <Link to='/trending'>
                             Trending
                         </Link>
-                    </li>
-                    <li>
-                        <Link to='/login'>
-                            Login
-                        </Link>
-                    </li>
-                    <li>
+                       </li>
+                       <li>
                         <Link to='/profile'>
                             Profile
                         </Link>
                     </li>
-                     <li>
+                    {!currentUser && <li>
+                        <Link to='/login'>
+                            Login
+                        </Link>
+                    </li>}
+                    
+                     {currentUser && <li>
                         <button onClick={logoutHandler}>
                             Logout
                         </button>
-                    </li> 
+                    </li>} 
                 </ul>
             </nav>
         </header>

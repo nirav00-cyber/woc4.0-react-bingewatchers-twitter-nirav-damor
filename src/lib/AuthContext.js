@@ -23,7 +23,7 @@ export function AuthProvider(props)
     }
     function login(email, password)
     {
-        return signInWithEmailAndPassword(auth,email, password);
+        return signInWithEmailAndPassword(auth, email, password);
     }
     function logout()
     {
@@ -37,6 +37,9 @@ export function AuthProvider(props)
             setLoading(false)
         })
         return unsubscribe;
+
+        
+    
     }, [])
     
     const value = {

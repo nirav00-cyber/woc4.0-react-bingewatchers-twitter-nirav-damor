@@ -37,7 +37,7 @@ function TrendingPage()
         dummyShows.push(showObj);
         }
         setTrendingShows(dummyShows);
-    console.log(dummyShows);    
+    // console.log(dummyShows);    
     }
     fetchTrending();
     },[]);

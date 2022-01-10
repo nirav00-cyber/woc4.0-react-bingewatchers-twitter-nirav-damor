@@ -1,18 +1,21 @@
 import React,{useState,useRef} from 'react'
 import {useHistory} from 'react-router-dom'
 import './LoginForm.css';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../lib/AuthContext';
 
 function LoginForm()
 {
     const [isLogin, setIsLogin] = useState(true);
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+
     const emailRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
-    const { signup,login} = useAuth();
+    
+    const { signup, login } = useAuth();
     const history = useHistory();
+
     async function submitHandler(e)
     {
         e.preventDefault();
@@ -22,11 +25,13 @@ function LoginForm()
             {
                 setIsLoading(true);
                 await login(emailRef.current.value, passwordRef.current.value);
+                setIsLoading(false);
                 history.push('/');
             } catch (error)
             {
-                console.log(error)
-                setError("Error occured while Log In"); 
+                setIsLoading(false);
+                // console.log();
+                setError("Error Occured : Enter Valid Email and password"); 
             }
         }
         else 
@@ -40,14 +45,16 @@ function LoginForm()
             setError("")
             setIsLoading(true);
            await signup(emailRef.current.value, passwordRef.current.value)
+           setIsLoading(false);
            history.push('/');
         } catch (error)
         {
-            setError('Error occured while sign Up')
-            console.log(error + '   signup Failed')
+            setIsLoading(false);
+            setError('Error occured while sign Up : account may already exist try using different credentials')
+            // console.log(error + '   signup Failed')
         }    
         }
-        setIsLoading(false);
+        
     }
 
     const toggleLoginModeHandler = () =>

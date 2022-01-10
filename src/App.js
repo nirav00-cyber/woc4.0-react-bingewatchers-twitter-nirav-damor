@@ -5,31 +5,31 @@ import ProfilePage from './pages/ProfilePage';
 import { Switch,Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import TrendingPage from './pages/TrendingPage';
-
+import ProtectedRoute from './lib/ProtectedRoute';
 
 
 function App()
 {
-  
+ 
   return (
     <div>
       <Layout>
         <Switch>
-          <Route path='/' exact>
-            <TweetPage ></TweetPage>
+
+            <ProtectedRoute path='/' component={TweetPage} exact>
+            </ProtectedRoute>
+        
+          <Route path='/login' component={LoginPage}>
           </Route>
-          <Route path='/login'>
-            <LoginPage></LoginPage>
-          </Route>
-          <Route path='/home'>
-            <TweetPage></TweetPage>
-          </Route>
-          <Route path='/profile'>
-            <ProfilePage></ProfilePage>
-          </Route>
-          <Route path='/trending'>
-            <TrendingPage></TrendingPage>
-          </Route>
+          
+          <ProtectedRoute path='/home' component={TweetPage}>
+          </ProtectedRoute>
+
+          <ProtectedRoute path='/profile' component={ProfilePage}>
+          </ProtectedRoute>
+
+          <ProtectedRoute path='/trending' component={TrendingPage}>
+          </ProtectedRoute>
           
         </Switch>
       </Layout>
