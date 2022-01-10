@@ -1,7 +1,7 @@
 import React,{useState,useRef} from 'react'
 import {useHistory} from 'react-router-dom'
 import './LoginForm.css';
-import { useAuth } from '../lib/AuthContext';
+import { useAuth } from '../../lib/AuthContext';
 
 function LoginForm()
 {

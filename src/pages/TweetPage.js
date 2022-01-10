@@ -1,6 +1,6 @@
-import React from 'react'
-
-import Tweets from '../components/Tweets';
+import React,{useState} from 'react'
+import AddTweet from '../components/Tweets/AddTweet';
+import Tweets from '../components/Tweets/Tweets';
 
 const DUMMY_TWEETS = [
     { id: 't1', user: 'nirav0', text: 'so you are saying that you are from different universe sdfvwe w vwe vwe wevk jb jbew iurb fwuie bwieu ubkwejb kjweb wjk bwjk b wjkwebrfjkb ejkbwej bwj bk', time: '2h ago',avatar:'/avatars/avatar.jpg' },
@@ -8,9 +8,29 @@ const DUMMY_TWEETS = [
     { id: 't3', user: 'nirav2', text: 'so you are saying that you are from different universe', time: '0h ago',avatar:'../avatars/avatar.jpeg' }
 ];
 
-function TweetPage() {
+function TweetPage()
+{
+    const [dummyTweets, setDummyTweets] = useState(DUMMY_TWEETS);
+    const addNewTweetHandler = (newTweet) =>
+    {
+        const completeTweet = {
+            id: Math.floor(Math.random() * 1000),
+            user: 'nirav',
+            text:newTweet.tweet,
+            time: 'just now',
+            avatar: '../avatars/avatar.jpeg'
+        }
+        setDummyTweets((prevState) =>
+        {
+            return [completeTweet,...prevState]
+        })
+        console.log(dummyTweets);
+    }
     return (
-        <Tweets dummyTweets={DUMMY_TWEETS}></Tweets>
+        <>
+        <AddTweet onAddTweet={addNewTweetHandler}></AddTweet>
+        <Tweets displaydummyTweets={dummyTweets}></Tweets>
+        </>
     );
 }
 

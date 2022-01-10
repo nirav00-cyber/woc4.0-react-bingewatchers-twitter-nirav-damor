@@ -1,5 +1,5 @@
 import React from 'react'
-import avatar from '../avatars/avatar.jpg';
+import avatar from '../../avatars/avatar.jpg';
 import './TweetItem.css';
 
 function TweetItem(props) {

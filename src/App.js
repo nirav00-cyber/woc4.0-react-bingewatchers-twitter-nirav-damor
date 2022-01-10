@@ -3,7 +3,7 @@ import LoginPage from './pages/LoginPage'
 import TweetPage from './pages/TweetPage';
 import ProfilePage from './pages/ProfilePage';
 import { Switch,Route } from 'react-router-dom';
-import Layout from './components/Layout';
+import Layout from './components/Navigation/Layout';
 import TrendingPage from './pages/TrendingPage';
 import ProtectedRoute from './lib/ProtectedRoute';
 

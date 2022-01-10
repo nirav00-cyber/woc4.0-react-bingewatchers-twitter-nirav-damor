@@ -5,7 +5,7 @@ function Tweets(props) {
     return (
         <div>
             <ul className='tweets-container'>
-                {props.dummyTweets.map((tweet) => (
+                {props.displaydummyTweets.map((tweet) => (
                     <TweetItem
                     key={tweet.id}
                     id={tweet.id}
