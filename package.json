@@ -6,6 +6,8 @@
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.5.0",
+    "dotenv": "^10.0.0",
+    "env-cmd": "^10.1.0",
     "firebase": "^9.6.2",
     "firebase-admin": "^10.0.1",
     "react": "^17.0.1",
@@ -37,5 +39,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "webpack": "^4.44.2",
+    "webpack-cli": "^4.9.1"
   }
 }
