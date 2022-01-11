@@ -1,10 +1,9 @@
 import React from 'react'
 
-
 function api() {
     return (
         <div>
-            This id API page
+            Api Page
         </div>
     )
 }

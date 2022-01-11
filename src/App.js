@@ -10,7 +10,7 @@ import ProtectedRoute from './lib/ProtectedRoute';
 
 function App()
 {
- 
+
   return (
     <div>
       <Layout>
@@ -28,7 +28,7 @@ function App()
           <ProtectedRoute path='/profile' component={ProfilePage}>
           </ProtectedRoute>
 
-          <ProtectedRoute path='/trending' component={TrendingPage}>
+          <ProtectedRoute path='/trending' component={TrendingPage} >
           </ProtectedRoute>
           
         </Switch>

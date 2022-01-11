@@ -1,35 +1,44 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import AddTweet from '../components/Tweets/AddTweet';
 import Tweets from '../components/Tweets/Tweets';
-
-const DUMMY_TWEETS = [
-    { id: 't1', user: 'nirav0', text: 'so you are saying that you are from different universe sdfvwe w vwe vwe wevk jb jbew iurb fwuie bwieu ubkwejb kjweb wjk bwjk b wjkwebrfjkb ejkbwej bwj bk', time: '2h ago',avatar:'/avatars/avatar.jpg' },
-    { id: 't2', user: 'nirav1', text: 'so you are saying that you are from different universe', time: '1h ago',avatar:'../avatars/avatar.jpeg' },
-    { id: 't3', user: 'nirav2', text: 'so you are saying that you are from different universe', time: '0h ago',avatar:'../avatars/avatar.jpeg' }
-];
-
+import {db} from '../firebase'
+import {collection,getDocs,addDoc} from "firebase/firestore"
 function TweetPage()
 {
-    const [dummyTweets, setDummyTweets] = useState(DUMMY_TWEETS);
-    const addNewTweetHandler = (newTweet) =>
+    const [allTweets, setAllTweets] = useState([]);
+    const tweetsCollectionRef = collection(db, "tweets") 
+    const [renderFirebase, setRenderFirebase] = useState(false);
+
+    useEffect(() =>
     {
-        const completeTweet = {
-            id: Math.floor(Math.random() * 1000),
-            user: 'nirav',
-            text:newTweet.tweet,
-            time: 'just now',
-            avatar: '../avatars/avatar.jpeg'
-        }
-        setDummyTweets((prevState) =>
+        const getAllTweets = async () =>
         {
-            return [completeTweet,...prevState]
-        })
-        console.log(dummyTweets);
-    }
+            const data = await getDocs(tweetsCollectionRef);
+            console.log("data fetched from firebase");
+            // console.log(data)
+            setAllTweets(data.docs.map((doc) => ({
+                ...doc.data(), id: doc.id
+            })))
+        }
+        getAllTweets();
+    }, [renderFirebase]);
+
+    const addTweet = async (newTweet) =>
+    {
+        await addDoc(tweetsCollectionRef,{name:'nirav2',text:newTweet.tweet,time:newTweet.time})
+        
+        console.log('Tweet added');
+        setRenderFirebase((prevState) => !prevState);
+        // setAllTweets((prevState) =>
+        // {
+        //     return [{ id:Math.floor(Math.random()*100000),name: 'nirav2', text: newTweet.tweet, time: newTweet.time,avatar:'dw' }, ...prevState];
+        // })
+   }
+
     return (
         <>
-        <AddTweet onAddTweet={addNewTweetHandler}></AddTweet>
-        <Tweets displaydummyTweets={dummyTweets}></Tweets>
+        <AddTweet onAddTweet={addTweet}></AddTweet>
+        <Tweets displaydummyTweets={allTweets} ></Tweets>
         </>
     );
 }

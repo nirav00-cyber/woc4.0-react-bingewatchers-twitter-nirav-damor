@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import {getAuth} from "firebase/auth"
-
+import { getFirestore } from "@firebase/firestore";
 const app = initializeApp({
 
 
@@ -26,4 +26,5 @@ appId: "1:587980750987:web:acee13d3015e91ae0ed48e",
 })
 
 export const auth = getAuth(app);
+export const db = getFirestore(app);
 export default app

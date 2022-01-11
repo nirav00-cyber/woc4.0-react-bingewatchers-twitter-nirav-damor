@@ -10,7 +10,8 @@ function AddTweet(props)
     {
         e.preventDefault();
         const enteredTweet = tweetRef.current.value;
-        props.onAddTweet({ tweet: enteredTweet });
+        const currentTime = new Date().toLocaleString();
+        props.onAddTweet({ tweet: enteredTweet,time:currentTime});
         setIsAddingTweet(false);
         
     }
