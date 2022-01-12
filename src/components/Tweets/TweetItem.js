@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React from 'react'
 import avatar from '../../avatars/avatar.jpg';
 import './TweetItem.css';
 import { db } from '../../firebase'
@@ -6,7 +6,6 @@ import {deleteDoc,doc} from "firebase/firestore"
 import { FaTrash,FaThumbsUp } from "react-icons/fa";
 function TweetItem(props)
 {
-const [isDeleted, setIsDeleted] = useState(false);
     const deleteTweetHandler = async(deleteTweetId) =>
     {
         // alert('Are You sure want to delete it');
@@ -14,14 +13,13 @@ const [isDeleted, setIsDeleted] = useState(false);
         try
         {
             await deleteDoc(tweetDoc);
-            setIsDeleted(true);
-        } catch (err) { console.log('error occured while deleting tweet') } console.log("tweet Deleted");
+       
+        } catch (err) { alert('error occured while deleting tweet') } 
         
     }   
 
     return (
-    <div>
-        {!isDeleted &&
+    
             <li className='item'>
             <div className='img-container'>
                 <img src={avatar} alt='avatar'/>
@@ -35,8 +33,7 @@ const [isDeleted, setIsDeleted] = useState(false);
                         </div>
             </div>
             
-                </li>}
-        </div>
+                </li>
     )
 }
 

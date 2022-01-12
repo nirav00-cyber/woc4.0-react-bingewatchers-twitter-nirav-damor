@@ -13,7 +13,7 @@ function LoginForm()
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
     
-    const { signup, login,currentUser } = useAuth();
+    const { signup, login} = useAuth();
     const history = useHistory();
 
     async function submitHandler(e)
@@ -26,7 +26,7 @@ function LoginForm()
                 setIsLoading(true);
                 await login(emailRef.current.value, passwordRef.current.value);
                 setIsLoading(false);
-                console.log(currentUser.email);
+                
                 history.push('/');
             } catch (error)
             {

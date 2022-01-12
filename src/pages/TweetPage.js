@@ -1,34 +1,66 @@
 import React,{useState,useEffect} from 'react'
 import AddTweet from '../components/Tweets/AddTweet';
 import Tweets from '../components/Tweets/Tweets';
-import {db} from '../firebase'
-import {collection,getDocs,addDoc} from "firebase/firestore"
+import { db } from '../firebase'
+import {addDoc,onSnapshot,collection} from "firebase/firestore"
 function TweetPage()
 {
     const [allTweets, setAllTweets] = useState([]);
     const tweetsCollectionRef = collection(db, "tweets") 
-    const [renderFirebase, setRenderFirebase] = useState(false);
+
 
     useEffect(() =>
     {
-        const getAllTweets = async () =>
+        // const getAllTweets = async () =>
+        // {
+        //     const data = await getDocs(tweetsCollectionRef);
+        //     console.log("data fetched from firebase");
+        //     // console.log(data)
+        //     setAllTweets(data.docs.map((doc) => ({
+        //         ...doc.data(), id: doc.id
+        //     })))
+        // }
+        // getAllTweets();
+        
+        
+        // db.collection("tweets").onSnapshot( (snapshot) =>
+        //     {
+        //         setAllTweets(snapshot.docs.map(doc => ({
+        //             id: doc.id,
+        //             ...doc.data()
+        //         })));
+        // }, (err) =>
+        // {
+        //     console.log("error occured loading data from firebase");
+        //     })
+        // console.log("tweets loaded");
+
+        
+         onSnapshot(tweetsCollectionRef, (snapshot) =>
+            {
+                setAllTweets(snapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                })));
+            })
+        return () =>
         {
-            const data = await getDocs(tweetsCollectionRef);
-            console.log("data fetched from firebase");
-            // console.log(data)
-            setAllTweets(data.docs.map((doc) => ({
-                ...doc.data(), id: doc.id
-            })))
+            setAllTweets([]);
         }
-        getAllTweets();
-    }, [renderFirebase]);
+        // clean up function 
+    },[]);
 
     const addTweet = async (newTweet) =>
     {
-        await addDoc(tweetsCollectionRef,{name:'nirav2',text:newTweet.tweet,time:newTweet.time})
-        
-        console.log('Tweet added');
-        setRenderFirebase((prevState) => !prevState);
+        try
+        {
+            await addDoc(tweetsCollectionRef, { name: 'nirav2', text: newTweet.tweet, time: newTweet.time })
+        }
+        catch {
+            alert('failed to add tweet');
+        }
+  
+
         // setAllTweets((prevState) =>
         // {
         //     return [{ id:Math.floor(Math.random()*100000),name: 'nirav2', text: newTweet.tweet, time: newTweet.time,avatar:'dw' }, ...prevState];
