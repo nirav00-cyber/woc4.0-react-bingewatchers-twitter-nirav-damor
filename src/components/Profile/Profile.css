@@ -1,59 +1,84 @@
 .profile-container{
-    background-color: lightblue;
-    margin: 5rem auto;
-    width: fit-content;
-    min-width: 50vw;
-    max-width: 70vw;
-    border-radius: 6px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-    padding: 1rem;
+    background-color:rgb(131, 216, 255);
     display: flex;
-    position: relative;
-}
-.avatar-container h3{
-    text-align: center;
-}
-.avatar-container img{
-    width: 10rem;
-    height: 10rem;
-    border-radius: 2rem;
-    margin-right:0.5rem;
-}
-
-.details-container{
-    /* background-color: rgb(225, 127, 255); */
-    width: 100%;
+    flex-direction: column;
+    width: 90vw;
+    max-width: 600px;   
+    margin: 3rem auto; 
+    border: 1.5px solid #3898db;
+    border-radius: 1.4rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+ 
 }
 
 .details-part1{
-    /* background-color: rgb(81, 255, 0); */
-    margin: 1rem;
-    padding: 0.2rem;
-    display: flex;
-   justify-content: space-evenly;
-    
+/* background-color: blue; */
+display: flex;
+justify-content: space-evenly;
+margin: 1rem auto;
+padding: 1rem;
+
+width: 100%;
+max-width: 600px;
+text-align: center;
+border-top: 1px solid white;
+border-bottom: 1px solid white;
+border-radius: 2px;
+font-weight: bold;
+
 }
 .details-part1 div{
-    position: inherit;
-    margin: 0.2rem;
-    width: 100%;
-    /* background-color: aqua; */
-    text-align: center;
-    width: auto;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    word-break: break-word;
 }
-
 .details-part2{
-    margin: 1rem auto;
-    padding: 1rem;
-    /* background-color: bisque; */
+/* background-color: brown; */
+width: 100%;
+max-width: 600px;
+margin: auto;
+padding: 1rem;
+word-wrap: break-word;
+    white-space: pre-wrap;
+    word-break: break-word;
 }
 
-@media only screen and (max-width: 650px) {
-  .profile-container{
-    flex-direction: column;
-  }
-  .avatar-container{
-      align-items: center;
-      margin: 1rem auto;
-  }
+.avatar-container{
+    /* background-color: bisque; */
+    display: block;
+   
+    margin: 1rem auto ;
+    height: 11rem;
+ 
 }
+.avatar-container img{
+display: block;
+  margin-left: auto;
+  margin-right: auto;
+    margin-bottom: 0rem;
+  height: 7rem;
+  width: 7rem;
+  border-radius:50%;
+
+}
+.avatar-container h3{
+
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 0.4rem;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    word-break: break-word;
+
+
+}
+
+/* @media(max-width:610px){
+    .profile-container{
+        margin: 0 auto ;
+        /* width: 100vw; */
+        /* border: none; */
+        /* border-radius: 0; */
+        /* box-shadow: none; */
+    /* } */
+/* } */ 

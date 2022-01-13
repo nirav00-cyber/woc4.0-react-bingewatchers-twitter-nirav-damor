@@ -35,6 +35,7 @@ export function AuthProvider(props)
         {
             setCurrentUser(user)
             setLoading(false)
+            // console.log(user.uid)
         })
         return unsubscribe;
 

@@ -5,4 +5,4 @@ function LoginPage() {
       <LoginForm/>
     )
 }
-export default LoginPage
+export default LoginPage;
