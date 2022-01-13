@@ -1,17 +1,23 @@
 import React,{useRef,useState} from 'react'
 
 import './AddTweet.css'
+
+import { useAuth } from '../../lib/AuthContext';
+
 function AddTweet(props)
 {
     const tweetRef = useRef();
     const [isAddingTweet, setIsAddingTweet] = useState(false);
+    const { userInfo} = useAuth();
+ 
 
-    const addTweetHandler = (e) =>
+    const addTweetHandler = async(e) =>
     {
         e.preventDefault();
+        
         const enteredTweet = tweetRef.current.value;
         const currentTime = new Date().toLocaleString();
-        props.onAddTweet({ tweet: enteredTweet,time:currentTime});
+        props.onAddTweet({ username:userInfo.username,tweet: enteredTweet,time:currentTime});
         setIsAddingTweet(false);
         
     }
@@ -34,7 +40,7 @@ function AddTweet(props)
         <div className='add-tweet-container'>
             <form className='add-tweet-form'
                         onSubmit={addTweetHandler}
-                        
+                        autoFocus
                     >
                 <div className='input-tweet'>
                     <label htmlFor='tweet'>Your Tweet</label>

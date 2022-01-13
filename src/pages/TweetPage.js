@@ -54,7 +54,7 @@ function TweetPage()
     {
         try
         {
-            await addDoc(tweetsCollectionRef, { name: 'nirav2', text: newTweet.tweet, time: newTweet.time })
+            await addDoc(tweetsCollectionRef, { name: newTweet.username, text: newTweet.tweet, time: newTweet.time })
         }
         catch {
             alert('failed to add tweet');
