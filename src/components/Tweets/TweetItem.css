@@ -92,6 +92,9 @@ width: 100%;
 .like-icon:active{
    transform: scale(1.2);
 }
+.like-icon.liked{
+    color: #3498db;
+}
 
 .edit-icon{
     cursor: pointer;

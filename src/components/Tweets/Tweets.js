@@ -13,6 +13,7 @@ function Tweets(props) {
                     key={tweet.id}
                     id={tweet.id}
                     user={tweet.name}    
+                    likeCount={tweet.likeCount}    
                     text={tweet.text}
                     time={tweet.time}    
                     avatar={tweet.text}

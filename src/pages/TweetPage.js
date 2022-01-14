@@ -3,12 +3,13 @@ import AddTweet from '../components/Tweets/AddTweet';
 import Tweets from '../components/Tweets/Tweets';
 import { db } from '../firebase'
 import {addDoc,onSnapshot,collection} from "firebase/firestore"
+
 function TweetPage()
 {
     const [allTweets, setAllTweets] = useState([]);
     const tweetsCollectionRef = collection(db, "tweets") 
     
-
+    
     useEffect(() =>
     {
         // const getAllTweets = async () =>
@@ -42,6 +43,7 @@ function TweetPage()
                     id: doc.id,
                     ...doc.data()
                 })));
+           
             })
         return () =>
         {
@@ -54,8 +56,8 @@ function TweetPage()
     {
         try
         {
-            await addDoc(tweetsCollectionRef, { userid: newTweet.userid, name: newTweet.username, text: newTweet.tweet, time: newTweet.time })
-            
+            await addDoc(tweetsCollectionRef, { userid: newTweet.userid, name: newTweet.username, text: newTweet.tweet, time: newTweet.time,likeCount:0 })
+       
 
         }
         catch(err) {

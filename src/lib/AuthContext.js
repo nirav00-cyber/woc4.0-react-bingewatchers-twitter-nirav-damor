@@ -19,7 +19,7 @@ export function AuthProvider(props)
     const [currentUser, setCurrentUser] = useState()
     const [loading, setLoading] = useState(true);
   const [userInfo, setUserInfo] = useState({});
-    
+  
     // console.log(currentUser.uid)
     // const userProfileRef = doc(db, "profile", currentUser.uid)
 
@@ -46,7 +46,7 @@ export function AuthProvider(props)
             {
                 
             const userProfileRef = doc(db, "profile", user.uid)
-            const getUserProfileData = async () =>
+        const getUserProfileData = async () =>
             {
             try
             {
@@ -63,9 +63,10 @@ export function AuthProvider(props)
                 console.log('profiledata fetching failed',err)
             }
             
-        }
-        getUserProfileData();
+                }
                 
+        getUserProfileData();
+        
             }
         })
         return unsubscribe;
@@ -104,6 +105,7 @@ export function AuthProvider(props)
         login,
         logout,
         userInfo
+        
     }
     return (
         <AuthContext.Provider value={value}>
