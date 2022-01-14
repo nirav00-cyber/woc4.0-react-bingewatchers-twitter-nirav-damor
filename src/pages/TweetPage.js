@@ -7,7 +7,7 @@ function TweetPage()
 {
     const [allTweets, setAllTweets] = useState([]);
     const tweetsCollectionRef = collection(db, "tweets") 
-
+    
 
     useEffect(() =>
     {
@@ -54,9 +54,12 @@ function TweetPage()
     {
         try
         {
-            await addDoc(tweetsCollectionRef, { name: newTweet.username, text: newTweet.tweet, time: newTweet.time })
+            await addDoc(tweetsCollectionRef, { userid: newTweet.userid, name: newTweet.username, text: newTweet.tweet, time: newTweet.time })
+            
+
         }
-        catch {
+        catch(err) {
+            console.log(err)
             alert('failed to add tweet');
         }
   

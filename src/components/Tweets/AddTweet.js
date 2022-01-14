@@ -3,13 +3,15 @@ import React,{useRef,useState} from 'react'
 import './AddTweet.css'
 
 import { useAuth } from '../../lib/AuthContext';
+import { db } from '../../firebase';
+import { doc, updateDoc } from "firebase/firestore";
 
 function AddTweet(props)
 {
     const tweetRef = useRef();
     const [isAddingTweet, setIsAddingTweet] = useState(false);
-    const { userInfo} = useAuth();
- 
+    const { userInfo,currentUser} = useAuth();
+    const updateprofileRef = doc(db,"profile",currentUser.uid)
 
     const addTweetHandler = async(e) =>
     {
@@ -17,7 +19,18 @@ function AddTweet(props)
         
         const enteredTweet = tweetRef.current.value;
         const currentTime = new Date().toLocaleString();
-        props.onAddTweet({ username:userInfo.username,tweet: enteredTweet,time:currentTime});
+        
+        try
+        {
+            const updatedDoc = {tweetCount:userInfo.tweetCount + 1}
+            await updateDoc(updateprofileRef, updatedDoc)
+            userInfo.tweetCount = userInfo.tweetCount + 1;
+         } catch (err)
+        {
+            console.log("profile update failed")
+        }
+        // console.log(currentUser.uid,typeof currentUser.uid)
+        props.onAddTweet({userid:currentUser.uid,username:userInfo.username,tweet: enteredTweet,time:currentTime});
         setIsAddingTweet(false);
         
     }

@@ -3,11 +3,13 @@ import avatar from '../../avatars/avatar.jpg';
 import './TweetItem.css';
 import { db } from '../../firebase'
 import {updateDoc,deleteDoc,doc} from "firebase/firestore"
-import { FaTrash,FaThumbsUp,FaEdit } from "react-icons/fa";
+import { FaTrash, FaThumbsUp, FaEdit } from "react-icons/fa";
+import { useAuth } from '../../lib/AuthContext';
 function TweetItem(props)
 {
     const [isEditing, setIsEditing] = useState(false);
     const editTweetRef = useRef("");
+    const { currentUser, userInfo } = useAuth();
     const toggleEditHandler = () =>
     {
         setIsEditing(prevState => !prevState);
@@ -19,9 +21,19 @@ function TweetItem(props)
         try
         {
             await deleteDoc(tweetDoc);
-       
+            
         } catch (err) { alert('error occured while deleting tweet') } 
-        
+        const updateTweetCountRef = doc(db, "profile", currentUser.uid);
+        try
+        {
+            const updateDocData = { tweetCount: userInfo.tweetCount - 1 }
+            
+            await updateDoc(updateTweetCountRef, updateDocData);
+            userInfo.tweetCount=userInfo.tweetCount-1
+        } catch (err)
+        {
+            console.log('updating tweetcount in profile failed');
+        }
     }   
     const editTweetHandler = async (e) =>
     {
