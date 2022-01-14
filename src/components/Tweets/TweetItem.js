@@ -5,6 +5,7 @@ import { db } from '../../firebase'
 import {updateDoc,deleteDoc,doc,getDocs,collection,setDoc,query,where} from "firebase/firestore"
 import { FaTrash, FaThumbsUp, FaEdit } from "react-icons/fa";
 import { useAuth } from '../../lib/AuthContext';
+
 function TweetItem(props)
 {
     const [isEditing, setIsEditing] = useState(false);
@@ -37,9 +38,9 @@ function TweetItem(props)
                     }
         }
         getlikesData()
-        console.log(likesInfo)
+        // console.log(likesInfo)
       
-    }, [])
+    }, [isLiked])
     
     useEffect(() => {
         if (likesInfo.find(({likedTweetId})=>likedTweetId===props.id)) 
@@ -157,14 +158,16 @@ function TweetItem(props)
                         <form autoFocus   className='edit-form' onSubmit={ editTweetHandler}>
                             <textarea type="text" defaultValue={props.text} ref={editTweetRef}>
                             </textarea>
-                            <button>Edit</button>
+                            <button className='btn'>Confirm Edit</button>
                         </form>
                 }
                     <p>{!isEditing && props.text}</p>
                 </div>
-                    <div className='control-icons'>
-                    <button type="button" disabled={isLoading}  className={likeButtonClasses} onClick={toggleLikeHandler}>Like</button>
-                    <small>{props.likeCount}</small>
+                <div className='control-icons'>
+                    <div>
+                    <button type="button" disabled={isLoading}  className={likeButtonClasses} onClick={toggleLikeHandler}><FaThumbsUp></FaThumbsUp></button>
+                        <small>{props.likeCount}</small>
+                    </div>
                     <FaEdit className='edit-icon' onClick={toggleEditHandler}></FaEdit>
                 <FaTrash onClick={deleteTweetHandler} className='trash-icon'>delete</FaTrash>
                         </div>
