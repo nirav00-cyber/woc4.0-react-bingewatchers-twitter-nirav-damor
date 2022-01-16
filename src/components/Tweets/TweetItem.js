@@ -13,7 +13,7 @@ function TweetItem(props)
     let { currentUser, userInfo } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
     const [likesInfo, setLikesInfo] = useState([]);
-
+    // const [isMyTweet, setIsMyTweet] = useState(false);
     useEffect(() =>
     {
         const getlikesData = async () =>
@@ -40,7 +40,7 @@ function TweetItem(props)
         getlikesData()
         // console.log(likesInfo)
       
-    }, [isLiked])
+    }, [isLiked,currentUser.uid])
     
     useEffect(() => {
         if (likesInfo.find(({likedTweetId})=>likedTweetId===props.id)) 
@@ -48,7 +48,14 @@ function TweetItem(props)
         // console.log(props.id)
             setIsLiked(true);    
         }
-    }, [likesInfo])
+        // console.log(props.userid)
+        // if (currentUser.uid === props.userid)
+        // {
+        //     console.log(currentUser.uid, props.userid);
+        //  console.log("yup my tweet")
+        //     setIsMyTweet(true);
+        // }
+    }, [likesInfo,props.id])
     const editTweetRef = useRef("");
     
     
@@ -143,6 +150,7 @@ function TweetItem(props)
         console.log(props.likeCount)
     }
     let likeButtonClasses = isLiked ? 'like-icon liked' : 'like-icon'
+    const isMyTweet = (props.userid===currentUser.uid)
     
     return (
     
@@ -151,7 +159,7 @@ function TweetItem(props)
                 <img src={avatar} alt='avatar'/>
             </div>
             <div className='user-container'>
-                <h3>@{props.user}  <small>{props.time}</small> </h3>
+                <h3>@{props.name}  <small>{props.time}</small> </h3>
                 
                 <div className='text' >
                     {isEditing && 
@@ -168,8 +176,16 @@ function TweetItem(props)
                     <button type="button" disabled={isLoading}  className={likeButtonClasses} onClick={toggleLikeHandler}><FaThumbsUp></FaThumbsUp></button>
                         <small>{props.likeCount}</small>
                     </div>
-                    <FaEdit className='edit-icon' onClick={toggleEditHandler}></FaEdit>
-                <FaTrash onClick={deleteTweetHandler} className='trash-icon'>delete</FaTrash>
+                    {
+                        isMyTweet &&
+                    
+                        <FaEdit className='edit-icon' onClick={toggleEditHandler}></FaEdit>
+                    }
+                    {isMyTweet &&
+                        <FaTrash onClick={deleteTweetHandler} className='trash-icon'>delete</FaTrash>
+                    }
+                        
+                
                         </div>
             </div>
             

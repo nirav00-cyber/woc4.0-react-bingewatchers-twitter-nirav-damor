@@ -12,11 +12,12 @@ function Tweets(props) {
                     <TweetItem
                     key={tweet.id}
                     id={tweet.id}
-                    user={tweet.name}    
+                    name={tweet.name}    
                     likeCount={tweet.likeCount}    
                     text={tweet.text}
                     time={tweet.time}    
                     avatar={tweet.text}
+                    userid={tweet.userid}
                     ></TweetItem>
                 ))}
             </ul>            
