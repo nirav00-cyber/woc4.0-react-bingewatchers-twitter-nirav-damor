@@ -9,6 +9,7 @@ import { db } from '../firebase';
 import { doc, getDoc} from "firebase/firestore"
 
 const AuthContext = React.createContext()
+const TMDB_API = 'https://api.themoviedb.org/3/trending/all/day?api_key=417ae7fd956736f41db826d383085158';
 
 export function useAuth()
 {
@@ -19,6 +20,7 @@ export function AuthProvider(props)
     const [currentUser, setCurrentUser] = useState()
     const [loading, setLoading] = useState(true);
   const [userInfo, setUserInfo] = useState({});
+    const [trendingShows, setTrendingShows] = useState([]);
   
     // console.log(currentUser.uid)
     // const userProfileRef = doc(db, "profile", currentUser.uid)
@@ -63,8 +65,36 @@ export function AuthProvider(props)
                 console.log('profiledata fetching failed',err)
             }
             
+            }
+            async function fetchTrending()
+            {
+            let dummyShows = [];
+            const response = await fetch(TMDB_API);
+            const data = await response.json();
+            if (!response.ok)
+            {
+                alert('Error Occurred while fetching Data');
+                return;
+            }
+            // console.log(data);
+            const shows = data.results;
+            for(let show in shows)
+            {
+                const showObj = {
+                    id: shows[show].id,
+                    title: shows[show].title,
+                    releaseDate: shows[show].release_date,
+                    description:shows[show].overview,
+                    rating: shows[show].vote_average,   
+                    poster:shows[show].backdrop_path
+                }    
+                dummyShows.push(showObj);
                 }
-                
+                setTrendingShows(dummyShows);
+            // console.log(dummyShows);    
+            }
+   
+        fetchTrending();        
         getUserProfileData();
         
             }
@@ -104,8 +134,8 @@ export function AuthProvider(props)
         signup,
         login,
         logout,
-        userInfo
-        
+        userInfo,
+        trendingShows
     }
     return (
         <AuthContext.Provider value={value}>
