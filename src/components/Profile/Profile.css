@@ -8,9 +8,15 @@
     border: 1.5px solid #3898db;
     border-radius: 1.4rem;
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    /* border: 2px solid #cccccc; */
  
 }
-
+.userprofile-container{
+    margin-bottom: 3rem;
+}
 .details-part1{
 /* background-color: blue; */
 display: flex;

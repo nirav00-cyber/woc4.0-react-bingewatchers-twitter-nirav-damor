@@ -1,4 +1,5 @@
-import React,{useState,useRef,useEffect} from 'react'
+import React, { useState, useRef, useEffect } from 'react'
+import {Link} from 'react-router-dom'
 import avatar from '../../avatars/avatar.jpg';
 import './TweetItem.css';
 import { db } from '../../firebase'
@@ -13,7 +14,9 @@ function TweetItem(props)
     let { currentUser, userInfo } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
     const [likesInfo, setLikesInfo] = useState([]);
-    // const [isMyTweet, setIsMyTweet] = useState(false);
+   
+   const editTweetRef = useRef("");
+    
     useEffect(() =>
     {
         const getlikesData = async () =>
@@ -37,7 +40,12 @@ function TweetItem(props)
                         console.log("errror getting likes data",err);
                     }
         }
-        getlikesData()
+        getlikesData();
+        
+        return () =>
+        {
+            setLikesInfo([]);
+        }
         // console.log(likesInfo)
       
     }, [isLiked,currentUser.uid])
@@ -48,6 +56,7 @@ function TweetItem(props)
         // console.log(props.id)
             setIsLiked(true);    
         }
+
         // console.log(props.userid)
         // if (currentUser.uid === props.userid)
         // {
@@ -55,8 +64,7 @@ function TweetItem(props)
         //  console.log("yup my tweet")
         //     setIsMyTweet(true);
         // }
-    }, [likesInfo,props.id])
-    const editTweetRef = useRef("");
+    }, [likesInfo, props.id])
     
     
     const toggleEditHandler = () =>
@@ -124,6 +132,7 @@ function TweetItem(props)
                 console.log("likeCount update failed",err);
             }
             setIsLiked(false);   
+
             
         }
         else 
@@ -144,13 +153,16 @@ function TweetItem(props)
                 console.log("likeCount update failed",err);
             }
             setIsLiked(true);    
+
         }
         setIsLoading(false);
-        console.log("enabled");
+     
         console.log(props.likeCount)
     }
+   
     let likeButtonClasses = isLiked ? 'like-icon liked' : 'like-icon'
     const isMyTweet = (props.userid===currentUser.uid)
+ 
     
     return (
     
@@ -159,7 +171,12 @@ function TweetItem(props)
                 <img src={avatar} alt='avatar'/>
             </div>
             <div className='user-container'>
-                <h3>@{props.name}  <small>{props.time}</small> </h3>
+                <h3 >
+                    <Link to={`/userprofile/${props.userid}`}>
+                    
+                       @{props.name}
+                   </Link>
+                    <small>{props.time}</small> </h3>
                 
                 <div className='text' >
                     {isEditing && 

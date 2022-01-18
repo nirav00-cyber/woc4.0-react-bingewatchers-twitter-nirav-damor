@@ -55,7 +55,7 @@ function Navigation()
                         </Link>
                        </li>
                        <li>
-                        <Link to='/profile'>
+                           <Link to={`/userprofile/${currentUser.uid}`}>
                             Profile
                         </Link>
                     </li>

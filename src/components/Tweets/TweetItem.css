@@ -6,7 +6,7 @@
     border-radius: 6px;
     border: 2px solid #cccccc;
     background-color: #fff;
-    width: min(70vw,40rem);
+    width: min(90vw,600px);
     font-size: 14px;
     line-height: 18px;
     /* background-color: aquamarine; */
@@ -140,4 +140,16 @@ width: 100%;
 }
 .edit-icon:hover{
     color: #1587d3;
+}
+
+a:link
+{
+    text-decoration: none;
+    color: #3498db;
+    
+}
+a:visited
+{
+    text-decoration: none;
+    color: #3498db;
 }

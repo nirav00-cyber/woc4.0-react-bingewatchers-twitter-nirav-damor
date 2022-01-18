@@ -6,7 +6,7 @@ import { Switch,Route } from 'react-router-dom';
 import Layout from './components/Navigation/Layout';
 import TrendingPage from './pages/TrendingPage';
 import ProtectedRoute from './lib/ProtectedRoute';
-
+import UserProfile from './pages/UserProfile';
 
 function App()
 {
@@ -25,12 +25,13 @@ function App()
           <ProtectedRoute path='/home' component={TweetPage}>
           </ProtectedRoute>
 
-          <ProtectedRoute path='/profile' component={ProfilePage}>
-          </ProtectedRoute>
+          
 
           <ProtectedRoute path='/trending' component={TrendingPage} >
           </ProtectedRoute>
           
+          <ProtectedRoute path='/userprofile/:profileId' component={UserProfile}>
+          </ProtectedRoute>
         </Switch>
       </Layout>
     </div>
