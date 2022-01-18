@@ -9,7 +9,8 @@ import { db } from '../firebase';
 import { doc, getDoc} from "firebase/firestore"
 
 const AuthContext = React.createContext()
-const TMDB_API = process.env.REACT_APP_TMDB_API
+const TMDB_API = 'https://api.themoviedb.org/3/trending/all/day?api_key=417ae7fd956736f41db826d383085158';
+
 export function useAuth()
 {
     return useContext(AuthContext)
