@@ -1,0 +1,34 @@
+.comment-item-container{
+    display: flex;
+    justify-content: flex-start;
+    border-top: 1.4px solid #3498db;
+
+}
+.comment-img-container{
+    display: flex;
+   flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    /* align-items: flex-start; */
+    
+    /* background-color: aqua; */
+}
+.comment-img-container img{
+    width: 30px;
+    height: 30px;
+    margin: 0.5rem;
+    border-radius: 50%;
+}
+.comment-img-container h4{
+    
+    margin-top: 0.8rem;
+}
+
+.comment-item-container p{
+    /* background-color: blueviolet; */
+    font-size: 13px;
+    margin:0.8rem 0.4rem 0.6rem 0.3rem;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    word-break: break-word;
+}

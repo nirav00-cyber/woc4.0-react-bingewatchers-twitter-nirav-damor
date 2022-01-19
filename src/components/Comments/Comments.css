@@ -1,0 +1,40 @@
+.comments-container{
+
+    display: flex;
+    flex-direction: column;
+    /* background-color: #ec0000; */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: inline;
+    /* font-size:0px; */
+
+}
+
+
+.comment-input-form{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 1.4rem 0;
+    /* background-color: rgb(189, 255, 127); */
+    /* margin-left: 0; */
+}
+.comment-input-form textarea{
+    border: 1.7px solid #3498db;
+    border-radius: 4px;
+    margin: 0rem 1rem 1rem 1rem;
+    width: 60%;
+
+}
+.comment-input-form textarea:focus{
+    border: 2px solid #3498db;
+    outline: none;
+
+}
+.comment-input-form .btn{
+    width: 30%;
+    height: 3.1rem;
+    font-weight: bold;
+    margin: 0rem 1rem 1rem 0;
+}

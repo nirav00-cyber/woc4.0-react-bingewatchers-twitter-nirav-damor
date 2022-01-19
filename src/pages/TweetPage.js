@@ -12,39 +12,19 @@ function TweetPage()
     
     useEffect(() =>
     {
-        // const getAllTweets = async () =>
-        // {
-        //     const data = await getDocs(tweetsCollectionRef);
-        //     console.log("data fetched from firebase");
-        //     // console.log(data)
-        //     setAllTweets(data.docs.map((doc) => ({
-        //         ...doc.data(), id: doc.id
-        //     })))
-        // }
-        // getAllTweets();
-        
-        
-        // db.collection("tweets").onSnapshot( (snapshot) =>
-        //     {
-        //         setAllTweets(snapshot.docs.map(doc => ({
-        //             id: doc.id,
-        //             ...doc.data()
-        //         })));
-        // }, (err) =>
-        // {
-        //     console.log("error occured loading data from firebase");
-        //     })
-        // console.log("tweets loaded");
+        const tweetsCollectionRef = collection(db, "tweets");
 
-        const tweetsCollectionRef = collection(db, "tweets") 
          onSnapshot(tweetsCollectionRef, (snapshot) =>
-            {
+         {
+
+             
                 setAllTweets(snapshot.docs.map(doc => ({
                     id: doc.id,
                     ...doc.data()
                 })));
-           
-            })
+                
+         })
+        
         return () =>
         {
             setAllTweets([]);

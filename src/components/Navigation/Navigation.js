@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Navigation.css';
 import { useAuth } from '../../lib/AuthContext';
 import { useHistory } from 'react-router-dom'
@@ -30,12 +30,12 @@ function Navigation()
     let navbarClass = `navbar-links ${ isToggle ? 'active' : '' }`;
        return (
         <header className='navbar'>
-            <Link to='/'>
+            <NavLink to='/'>
                 <div className='logo'>
                     BingeWatcher's Twitter
                 </div>
-            </Link>
-               <div className={toggleClass}
+            </NavLink>
+            <div className={toggleClass}
                onClick={toggleHandler}>
                 
                 <span className='bar' />
@@ -45,24 +45,25 @@ function Navigation()
                <nav className={navbarClass}>
                 <ul>
                     <li>
-                        <Link to='/home'>
+                        <NavLink to='/home' activeClassName='active'>
                             Home
-                        </Link>
+                        </NavLink>
                     </li>
                     <li>
-                        <Link to='/trending'>
+                        <NavLink to='/trending' activeClassName='active'>
                             Trending
-                        </Link>
+                        </NavLink>
                        </li>
+                       {currentUser &&
                        <li>
-                           <Link to={`/userprofile/${currentUser.uid}`}>
+                         <NavLink to={`/userprofile/${currentUser.uid}`} activeClassName='active'>
                             Profile
-                        </Link>
-                    </li>
+                        </NavLink>
+                    </li>}
                     {!currentUser && <li>
-                        <Link to='/login'>
+                        <NavLink to='/login' activeClassName='active'>
                             Login
-                        </Link>
+                        </NavLink>
                     </li>}
                     
                      {currentUser && <li>

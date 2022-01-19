@@ -39,10 +39,11 @@
 
 .navbar-links li a{
     display: block;
-    /* background-color: aqua; */
+    margin: 0.5rem;
     text-decoration: none;
     color: white;
     padding: 1rem;
+    border-radius: 2.3px;
 }
 
 
@@ -50,22 +51,26 @@
 
 .navbar-links  button{
     font: inherit;
-    background-color: #0a588b;
-    border: 2px solid white;
+    background-color: #3498db;
+    border: 1.5px solid white;
     color:white;
     font-weight: bold;
     padding: 0.5rem 1.5rem;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
-
+    margin: auto 0.4rem;
 }
-.navbar-links a:hover {
+.navbar-links a.active{
+    background-color: #2b77aa;
+}
+.navbar-links a:hover{
   background-color: #0a588b;
   /* color: black; */
 }
 
 .navbar-links button:hover {
-  background-color: #3498db;
+  background-color: #0a588b;
+  
   /* color: transparent; */
 }
 .navbar-links button:active {
@@ -76,15 +81,16 @@
         }
 .toggle-button {
     position: absolute;
-    top: .75rem;
-    right: 1rem;
-    margin: 0.3rem;
+    top: 0.4rem;
+    right: 0.6rem;
+    margin: 1rem;
     display: none;
     flex-direction: column;
     justify-content: space-between;
     width: 30px;
     height: 21px;
     cursor: pointer;
+
 }
 
 .toggle-button .bar {
@@ -93,31 +99,45 @@
     background-color: white;
     border-radius: 10px;
 }
-
+.logo:hover{
+    color:rgb(227, 232, 233);
+}
 @media (max-width: 800px) {
     .navbar {
+        margin: 1rem;
+        display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         margin: 0;
         padding: 1% 1%;
+    
     }
-
+    .logo{
+        
+        font-size: 1.5rem;
+    }
     .toggle-button {
         display: flex;
     }
 
     .navbar-links {
         display: none;
+
         width: 100%;
     }
 
     .navbar-links ul {
         width: 100%;
+        display: flex;
         flex-direction: column;
+        align-items: center;
+        background-color: aqua;
+        
     }
 
     .navbar-links ul li {
         text-align: center;
+        
     }
 
     .navbar-links ul li a {
@@ -126,5 +146,9 @@
 
     .navbar-links.active {
         display: flex;
+
+    }
+    .navbar-links  button{
+        margin: 0.6rem auto;
     }
 }

@@ -1,3 +1,8 @@
+.tweetItem-container{
+    display: flex;
+    flex-direction: column;
+    
+}
 .item{    
     margin: 1rem auto;
     padding: 1rem;
@@ -9,9 +14,8 @@
     width: min(90vw,600px);
     font-size: 14px;
     line-height: 18px;
-    /* background-color: aquamarine; */
+    /* background-color: rgb(17, 253, 175); */
 }
-
 
 .img-container img{
      width: 48px;
@@ -20,12 +24,20 @@
     margin-right: 10px;
     align-self: center;
 }
+.user-comment-container{
+    width: 100%;
+    display: flex;
+    /* background-color: aquamarine; */
+    flex-direction:column;
+
+}
 .user-container{
-    /* background-color: aqua; */
+    /* width: 100%; */
     margin-top: 0;
     background-color:#fff;
     /* word-wrap: break-word; */
-    width: 100%;
+    /* background-color: aqua; */
+
 }
 .user-container h3{
     font-weight: bold;
@@ -86,15 +98,11 @@ width: 100%;
 .control-icons{
     display: flex;
     justify-content: space-between;
+
     /* background-color: aquamarine; */
 }
-.control-icons div{
-    /* background-color: beige; */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-}
+
+
 .control-icons div small{
     color: #3498db;
     font-size: small;
@@ -102,6 +110,7 @@ width: 100%;
     margin-left: 0.2rem;
     margin-bottom: 0.1rem;
 }
+
 .trash-icon{
     cursor: pointer;
     color: #3498db;
@@ -120,7 +129,8 @@ width: 100%;
     color: #cccccc;
     background: transparent;
     border: none;
-    
+    align-self: flex-start;
+    margin-left: 0;
 }
 
 .like-icon:hover{
@@ -152,4 +162,22 @@ a:visited
 {
     text-decoration: none;
     color: #3498db;
+}
+.comment-icon{
+    cursor: pointer;
+    color: #3498db;
+}
+.comment-icon:active{
+   transform: scale(1.2);
+}
+.comment-icon:active{
+   transform: scale(1.2);
+}
+
+.show-comments-container{
+    margin-top: 0.2rem;
+    background-color: #7EC8E3;
+    border: 2px solid #4ca9e7;
+    border-radius: 6px;
+
 }

@@ -2,6 +2,7 @@
    
     margin: 1rem 0;
     background-color: rgb(6, 158, 228);
+    background-color: #52a9e4;
     height:  15vh;
     text-align: center;
     vertical-align: middle;
@@ -11,6 +12,7 @@
 
 }
 .shows{
+
     display: flex;
     flex-direction: row;
     margin: auto;

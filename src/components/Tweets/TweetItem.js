@@ -3,69 +3,59 @@ import {Link} from 'react-router-dom'
 import avatar from '../../avatars/avatar.jpg';
 import './TweetItem.css';
 import { db } from '../../firebase'
-import {updateDoc,deleteDoc,doc,getDocs,collection,setDoc,query,where} from "firebase/firestore"
-import { FaTrash, FaThumbsUp, FaEdit } from "react-icons/fa";
+import {updateDoc,deleteDoc,doc,collection,setDoc,onSnapshot} from "firebase/firestore"
+import { FaTrash, FaThumbsUp, FaEdit ,FaComment} from "react-icons/fa";
 import { useAuth } from '../../lib/AuthContext';
-
+import Comments from '../Comments/Comments';
 function TweetItem(props)
 {
     const [isEditing, setIsEditing] = useState(false);
-    const [isLiked, setIsLiked] = useState(false);
     let { currentUser, userInfo } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
+    const [isLiked, setIsLiked] = useState(false);
     const [likesInfo, setLikesInfo] = useState([]);
-   
-   const editTweetRef = useRef("");
+    const [commentsInfo, setCommentsInfo] = useState([]);
+    const [showComments, setShowComments] = useState(false);
+    const editTweetRef = useRef("");
+
+
     
     useEffect(() =>
     {
-        const getlikesData = async () =>
-                {
-                    try
-                    {
-                        const likesDataRef = collection(db, "likes");
-                        const likesDataQuery = query(likesDataRef, where("userid", "==", currentUser.uid))
-                        const likesData = await getDocs(likesDataQuery);
-
-                        // likesData.forEach((doc) =>
-                        // {
-                        //     console.log(doc.data())
-                        // })
-                        // console.log("executed till here",likesData.docs.data)
-                        setLikesInfo(likesData.docs.map(doc => ({
-                            likedTweetId:doc.data().likedTweetId
-                        })))
-                    } catch (err)
-                    {
-                        console.log("errror getting likes data",err);
-                    }
-        }
-        getlikesData();
-        
+        const likesCollectionRef = collection(db, "tweets", props.id, "likedBy");
+        onSnapshot(likesCollectionRef, (snapshot) =>
+        { 
+            setLikesInfo(snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            })));
+                
+        })
+        const commentsCollectionRef = collection(db, "tweets", props.id, "comments");
+        onSnapshot(commentsCollectionRef, (snapshot) =>
+        {
+         
+            setCommentsInfo(snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            })));
+                
+        })
         return () =>
         {
             setLikesInfo([]);
+            setCommentsInfo([]);
         }
-        // console.log(likesInfo)
-      
-    }, [isLiked,currentUser.uid])
-    
-    useEffect(() => {
-        if (likesInfo.find(({likedTweetId})=>likedTweetId===props.id)) 
+    }, [props.id])
+
+    useEffect(() =>
+    {
+        if (likesInfo.find(({userid})=>userid===currentUser.uid)) 
         {
         // console.log(props.id)
             setIsLiked(true);    
         }
-
-        // console.log(props.userid)
-        // if (currentUser.uid === props.userid)
-        // {
-        //     console.log(currentUser.uid, props.userid);
-        //  console.log("yup my tweet")
-        //     setIsMyTweet(true);
-        // }
-    }, [likesInfo, props.id])
-    
+    }, [currentUser.uid, likesInfo])
     
     const toggleEditHandler = () =>
     {
@@ -114,69 +104,68 @@ function TweetItem(props)
     const toggleLikeHandler = async () =>
     {
         setIsLoading(true);
-        console.log('disabled');
-       
         if (isLiked)
         {
-            const updatelikesCountRef = doc(db, "tweets", props.id);
-            const updatedLikes = { likeCount: props.likeCount - 1 };
-             const deleteLikeDocRef = doc(db, "likes", currentUser.uid + props.id);
+            const deleteLikeRef = doc(db, "tweets", props.id, "likedBy", currentUser.uid + props.id);
+            const updateLikeCountRef = doc(db, "tweets", props.id);
+            const updatedLikeCount = { likeCount: props.likeCount - 1 };
             try
             {
-                await updateDoc(updatelikesCountRef, updatedLikes);
-                await deleteDoc(deleteLikeDocRef);
-
-               
+                await updateDoc(updateLikeCountRef, updatedLikeCount);
+                await deleteDoc(deleteLikeRef);
             } catch (err)
             {
-                console.log("likeCount update failed",err);
+                console.log("decreasing like count failed",err);
             }
-            setIsLiked(false);   
-
-            
+            setIsLiked(false);
         }
-        else 
+        else
         {
-            const updatelikesCountRef = doc(db, "tweets", props.id);
-            const updatedLikes = { likeCount: props.likeCount + 1 };
-            const likesCollectionRef = collection(db, "likes");
+            const likesCollectionRef = collection(db, "tweets", props.id, "likedBy");
+            const updateLikeCountRef = doc(db, "tweets", props.id);
+            const updatedLikeCount = { likeCount: props.likeCount + 1 };
             try
             {
-                await updateDoc(updatelikesCountRef, updatedLikes);
+                await updateDoc(updateLikeCountRef, updatedLikeCount);
                 await setDoc(doc(likesCollectionRef, currentUser.uid + props.id), {
-                    userid: currentUser.uid,
-                    likedTweetId:props.id
+                    name: props.name,
+                    userid:currentUser.uid
                 })
-
             } catch (err)
             {
-                console.log("likeCount update failed",err);
+                console.log("increasing like count failed",err);
+                
             }
-            setIsLiked(true);    
-
+            setIsLiked(true);
         }
         setIsLoading(false);
-     
-        console.log(props.likeCount)
     }
-   
+    const toggleShowCommentsHandler = () =>
+    {
+        setShowComments(prevState => !prevState);
+   }
     let likeButtonClasses = isLiked ? 'like-icon liked' : 'like-icon'
     const isMyTweet = (props.userid===currentUser.uid)
  
+    console.log(commentsInfo);
     
     return (
-    
-            <li className='item'>
+    <li className='tweetItem-container'>
+
+            <div className='item'>
+
             <div className='img-container'>
                 <img src={avatar} alt='avatar'/>
             </div>
+            <div className='user-comment-container'>
             <div className='user-container'>
                 <h3 >
                     <Link to={`/userprofile/${props.userid}`}>
                     
                        @{props.name}
                    </Link>
-                    <small>{props.time}</small> </h3>
+                    <small>{props.time}</small>
+                </h3>
                 
                 <div className='text' >
                     {isEditing && 
@@ -188,25 +177,43 @@ function TweetItem(props)
                 }
                     <p>{!isEditing && props.text}</p>
                 </div>
+           
+           
+
                 <div className='control-icons'>
+                   
                     <div>
-                    <button type="button" disabled={isLoading}  className={likeButtonClasses} onClick={toggleLikeHandler}><FaThumbsUp></FaThumbsUp></button>
+                    <button type="button" disabled={isLoading} className={likeButtonClasses} onClick={toggleLikeHandler}><FaThumbsUp></FaThumbsUp></button>
                         <small>{props.likeCount}</small>
                     </div>
+                        
+                    <div>
+                        <FaComment className='comment-icon' onClick={toggleShowCommentsHandler}></FaComment>
+                    </div>
+                    <div className='edit-delete-icons'>
                     {
                         isMyTweet &&
                     
                         <FaEdit className='edit-icon' onClick={toggleEditHandler}></FaEdit>
-                    }
+                        }
+                    </div>
+                    <div>
                     {isMyTweet &&
                         <FaTrash onClick={deleteTweetHandler} className='trash-icon'>delete</FaTrash>
                     }
+                    </div>
+                    </div> 
                         
-                
-                        </div>
-            </div>
-            
-                </li>
+                    </div>
+                    {showComments && 
+                     <div className='show-comments-container'> 
+                        <Comments commentsInfo={commentsInfo} tweetId={props.id}></Comments>
+                    </div>}
+                </div>
+                </div>
+          
+                   
+        </li>
     )
 }
 
