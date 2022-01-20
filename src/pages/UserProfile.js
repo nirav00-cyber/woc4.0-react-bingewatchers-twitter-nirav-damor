@@ -11,7 +11,7 @@ function UserProfile(props)
   
     const params = useParams();
     const { profileId } = params;
-    console.log(profileId);
+    // console.log(profileId);
     const [userProfileData, setUserProfileData] = useState({});
     const [userTweets, setUserTweets] = useState([]);
 

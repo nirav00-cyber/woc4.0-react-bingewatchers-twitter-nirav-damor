@@ -18,6 +18,7 @@ function TweetItem(props)
     const [showComments, setShowComments] = useState(false);
     const editTweetRef = useRef("");
 
+    
 
     
     useEffect(() =>
@@ -143,11 +144,11 @@ function TweetItem(props)
     const toggleShowCommentsHandler = () =>
     {
         setShowComments(prevState => !prevState);
-   }
+    }
     let likeButtonClasses = isLiked ? 'like-icon liked' : 'like-icon'
     const isMyTweet = (props.userid===currentUser.uid)
  
-    console.log(commentsInfo);
+
     
     return (
     <li className='tweetItem-container'>
@@ -160,8 +161,7 @@ function TweetItem(props)
             <div className='user-comment-container'>
             <div className='user-container'>
                 <h3 >
-                    <Link to={`/userprofile/${props.userid}`}>
-                    
+                <Link to={`/userprofile/${props.userid}`}>    
                        @{props.name}
                    </Link>
                     <small>{props.time}</small>
@@ -182,19 +182,21 @@ function TweetItem(props)
 
                 <div className='control-icons'>
                    
-                    <div>
+                    <div className='like-icon-container'>
                     <button type="button" disabled={isLoading} className={likeButtonClasses} onClick={toggleLikeHandler}><FaThumbsUp></FaThumbsUp></button>
                         <small>{props.likeCount}</small>
                     </div>
                         
-                    <div>
+                    <div className='comment-icon-container'>
                         <FaComment className='comment-icon' onClick={toggleShowCommentsHandler}></FaComment>
+                        <small>{commentsInfo.length}</small>
                     </div>
                     <div className='edit-delete-icons'>
                     {
                         isMyTweet &&
                     
-                        <FaEdit className='edit-icon' onClick={toggleEditHandler}></FaEdit>
+                                    <FaEdit className='edit-icon' onClick={toggleEditHandler}></FaEdit>
+                                    
                         }
                     </div>
                     <div>

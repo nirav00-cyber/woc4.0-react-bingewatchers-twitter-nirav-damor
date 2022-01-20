@@ -7,7 +7,7 @@ import {collection, addDoc } from "firebase/firestore"
 import { useAuth } from '../../lib/AuthContext';
 function Comments(props)
 {
-    console.log(props.tweetId);
+    // console.log(props.tweetId);
     
     const { userInfo } = useAuth();
     const commentInputRef = useRef('');
@@ -18,7 +18,7 @@ function Comments(props)
         try
         {
             await addDoc(commentsCollectionRef, { name: userInfo.username, comment: commentInputRef.current.value });
-            
+            commentInputRef.current.reset();
             
         } catch (err)
         {

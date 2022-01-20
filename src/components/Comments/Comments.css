@@ -17,6 +17,7 @@
     justify-content: flex-start;
     align-items: center;
     margin: 1.4rem 0;
+    
     /* background-color: rgb(189, 255, 127); */
     /* margin-left: 0; */
 }
@@ -37,4 +38,23 @@
     height: 3.1rem;
     font-weight: bold;
     margin: 0rem 1rem 1rem 0;
+}
+
+@media(max-width:450px){
+    .comment-input-form{
+        height: 10vh;
+    }
+    .comment-input-form .btn{
+        padding: 0.1rem;
+        font-size: small;
+        margin: auto;
+        margin-top: 0.1rem;
+        /* margin-left: 0.1rem; */
+        /* margin-right: 0.1rem; */
+    }
+    .comment-input-form textarea{
+        /* margin-right:0.1rem; */
+        /* margin-left: 0.4rem; */
+        margin: auto;
+    }
 }

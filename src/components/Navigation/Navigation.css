@@ -12,6 +12,7 @@
     padding:0 2%;
     margin: 0;
     transition: all 1s ease-out;
+    z-index: 10;
 }
 
 .logo{
