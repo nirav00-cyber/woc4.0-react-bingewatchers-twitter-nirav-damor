@@ -64,7 +64,7 @@ h2{
 }
 .btn:hover{
         background-color: #2b6992;
-
+        border: none;
 
 }
 button:disabled,

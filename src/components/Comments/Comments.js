@@ -18,7 +18,7 @@ function Comments(props)
         try
         {
             await addDoc(commentsCollectionRef, { name: userInfo.username, comment: commentInputRef.current.value });
-            console.log('suiceeskj ');
+            
             
         } catch (err)
         {

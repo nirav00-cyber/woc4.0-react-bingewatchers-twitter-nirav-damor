@@ -60,6 +60,7 @@ button:active{
 }
 .add-tweet button:hover{
     background-color: #2b6992;
+    border: 2px solid #2b6992;
 }
 .add-tweet{
     display: flex;

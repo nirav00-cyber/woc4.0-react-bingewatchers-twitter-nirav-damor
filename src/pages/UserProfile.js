@@ -5,7 +5,7 @@ import avatar from '../avatars/avatar.jpg';
 import { db } from '../firebase'
 import {doc,getDoc,collection,where,query,onSnapshot} from "firebase/firestore"
 import Tweets from '../components/Tweets/Tweets';
-
+import './Profile.css';
 function UserProfile(props)
 {
   
