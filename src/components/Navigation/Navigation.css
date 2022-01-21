@@ -158,3 +158,16 @@
         margin: 0.6rem auto;
     }
 }
+
+@media(max-width:400px)
+{
+    .logo{
+        display: block;
+        float: left;
+        font-size: 1rem;
+        align-self: flex-start;
+    }
+    .toggle-button{
+        margin: 0.8rem 0.3rem 0.3rem 0.1rem;
+    }
+}

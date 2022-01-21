@@ -9,15 +9,21 @@
     line-height: 15vh;  
     color: white;
     padding: auto;
-
+    /* background-color: aqua; */
 }
 .shows{
-
+    /* background-color: antiquewhite; */
     display: flex;
     flex-direction: row;
     margin: auto;
-    padding: 5rem;
+    padding: 1rem;
     width: 100%;
     justify-content: center;
     flex-wrap: wrap;
+}
+
+@media(max-width:400px){
+    .trending-poster{
+        font-size: small;
+    }
 }

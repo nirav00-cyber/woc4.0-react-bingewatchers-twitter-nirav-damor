@@ -12,7 +12,7 @@ function TrendingItem(props) {
             </div>
             <div className='show-details'>
                 <h3>{props.title}</h3>
-                <span>Rating:{props.rating}</span>
+                
                 <p>{props.description}</p>
             </div>
         </div>
