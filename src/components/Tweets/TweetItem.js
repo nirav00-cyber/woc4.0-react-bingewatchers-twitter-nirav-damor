@@ -70,7 +70,7 @@ function TweetItem(props)
         {
             await deleteDoc(tweetDoc);
             
-        } catch (err) { alert('error occured while deleting tweet') } 
+        } catch (err) { console.log('error occured while deleting tweet') } 
         const updateTweetCountRef = doc(db, "profile", currentUser.uid);
         try
         {
@@ -86,19 +86,19 @@ function TweetItem(props)
     const editTweetHandler = async (e) =>
     {
         e.preventDefault();
-        console.log(props.id)
+        // console.log(props.id)
         const editDocRef = doc(db, "tweets", props.id);
         const newFields = {text:editTweetRef.current.value}
         try
         {
             await updateDoc(editDocRef,newFields);
-            console.log("tweet edited");
+            // console.log("tweet edited");
         }
         catch (err)
         {
             console.log("tweet edited failed",err);
         }
-        console.log(editTweetRef.current.value);
+        // console.log(editTweetRef.current.value);
 
         setIsEditing(false);
     }
@@ -199,7 +199,7 @@ function TweetItem(props)
                                     
                         }
                     </div>
-                    <div>
+                    <div> 
                     {isMyTweet &&
                         <FaTrash onClick={deleteTweetHandler} className='trash-icon'>delete</FaTrash>
                     }

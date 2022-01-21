@@ -57,14 +57,14 @@ h2{
     width: 100%; 
 }
 .btn:active {
-            transform: scale(0.98);
+            /* transform: scale(0.98); */
             /* Scaling button to 0.98 to its original size */
             box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
             /* Lowering the shadow */
 }
 .btn:hover{
         background-color: #2b6992;
-        border: none;
+        /* border: none; */
 
 }
 button:disabled,
@@ -99,10 +99,12 @@ font-size: medium;
 }
 
 .error{
-    border: 2px solid red;
+    border: 1px solid #D8000C;
     border-radius: 4px;
-
-    background-color: rgba(233, 78, 78, 0.2);
+  font-size: small;
+    /* background-color: rgba(233, 78, 78, 0.2); */
     text-align: center;
-    color: red;
+    /* color: red; */
+    color: #D8000C;
+    background-color: #FFD2D2;
 }
