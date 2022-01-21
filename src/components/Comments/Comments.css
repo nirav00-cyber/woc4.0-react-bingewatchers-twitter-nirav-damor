@@ -5,6 +5,8 @@
     /* background-color: #ec0000; */
     margin: 0;
     padding: 0;
+    width: 100%;
+    /* margin-left: 0; */
     list-style: none;
     display: inline;
     /* font-size:0px; */

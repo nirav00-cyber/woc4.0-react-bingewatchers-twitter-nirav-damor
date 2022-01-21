@@ -13,10 +13,10 @@ function CommentItem(props)
 
 
             <img src={avatar} alt='avatar' />
-            <h4>{props.name}</h4>
+            
         </div>                
                     
-        <p>{props.comment}</p>
+            <p><b>{props.name}</b>  {props.comment}</p>
         
         
     </li>);

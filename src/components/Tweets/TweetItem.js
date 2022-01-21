@@ -151,8 +151,8 @@ function TweetItem(props)
 
     
     return (
-    <li className='tweetItem-container'>
-
+    <li >
+            <div className='tweetItem-container'>
             <div className='item'>
 
             <div className='img-container'>
@@ -207,13 +207,15 @@ function TweetItem(props)
                     </div> 
                         
                     </div>
+
+                    
+                </div>
+                </div>
                     {showComments && 
                      <div className='show-comments-container'> 
                         <Comments commentsInfo={commentsInfo} tweetId={props.id}></Comments>
                     </div>}
-                </div>
-                </div>
-          
+          </div>
                    
         </li>
     )
