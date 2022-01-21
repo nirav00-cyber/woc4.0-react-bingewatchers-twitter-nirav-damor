@@ -7,6 +7,7 @@ import {collection, addDoc } from "firebase/firestore"
 import { useAuth } from '../../lib/AuthContext';
 function Comments(props)
 {
+
     // console.log(props.tweetId);
     
     const { userInfo } = useAuth();
@@ -25,6 +26,7 @@ function Comments(props)
             console.log("adding comment failed",err);
             
         }
+        commentInputRef.current.value = '';
     }
     return <div>
         
