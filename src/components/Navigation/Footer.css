@@ -1,0 +1,71 @@
+.footer-container{
+    margin-top: 1rem;
+    display: flex;
+    background-color: #60b2ec;
+    height: 50px;
+    justify-content: space-around;
+    align-items: center;
+}
+.footer-p1{
+    /* background-color: aqua; */
+    color: white;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 5px;
+    height: 50px;
+}
+
+.footer-p2{
+    /* background-color: aqua; */
+    height: 50px;
+    color: aliceblue;
+}
+
+.footer-p3{
+    /* background-color: aqua; */
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5px;
+}
+.github-icon{
+    border: 2px solid white;
+    border-radius: 50%;
+    background-color: white;
+    align-self: center;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+}
+.footer-p1 p:hover{
+    color: rgb(161, 216, 238);
+    cursor: pointer;
+}
+.github-icon:hover{
+    transform: scale(1.05);
+    transition: all 0.5s;
+    
+}
+
+@media(max-width:600px){
+    .footer-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        height: 170px;
+    }
+    .footer-p2{
+        height: 45px;
+    }
+    .footer-p3{
+        height: 30px;   
+        margin: 10px auto;
+    }
+    .footer-p1{
+        height: 30px;
+    }
+}
